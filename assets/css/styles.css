@@ -923,6 +923,12 @@ header {
   pointer-events: auto;
 }
 .story-popover .quote {
+  /* Undo the base .quote's display: -webkit-box (used for the clamp).
+     Chromium tolerates a leftover -webkit-box display once the clamp is
+     off, but Safari keeps the legacy webkit flex-box layout active and
+     renders the un-clamped text broken — this reset is what actually
+     fixes it there. */
+  display: block;
   -webkit-line-clamp: unset;
   line-clamp: unset;
   overflow: visible;
