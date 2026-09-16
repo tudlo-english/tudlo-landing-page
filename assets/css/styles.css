@@ -120,7 +120,7 @@ h3 {
     sans-serif;
   font-size: clamp(2.1rem, 4.3vw, 3.5rem);
   line-height: 1.08;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.02em;
   font-weight: 900;
 }
 /* keeps a section title on the exact same lines at every screen size */
@@ -601,11 +601,25 @@ header {
   justify-content: center;
 }
 .teacher-photo img {
-  width: 106%;
-  max-width: none;
+  width: 100%;
+  max-width: 540px;
+  max-height: 700px;
   object-fit: contain;
   display: block;
   align-self: flex-end;
+  /* The source photo has a hard black/orange background — fade it out at the
+     edges so it blends into the section's white background instead of
+     showing as a rectangle. */
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 72% at 50% 42%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 60% 72% at 50% 42%,
+    #000 55%,
+    transparent 100%
+  );
 }
 .teacher-chip {
   position: absolute;
@@ -784,8 +798,16 @@ header {
   border-color: var(--blue);
   color: #fff;
 }
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
 .stories-grid {
   display: flex;
+  /* flex-start (not the stretch default) so a card expanded on hover grows
+     on its own without forcing every other card in the row to match it */
+  align-items: flex-start;
   gap: 17px;
   overflow-x: auto;
   padding: 2px 1px 12px;
@@ -795,6 +817,7 @@ header {
   display: none;
 }
 .story {
+  position: relative;
   flex: 0 0 calc((100% - 34px) / 3);
   border: 1px solid var(--line);
   border-radius: 22px;
@@ -802,6 +825,18 @@ header {
   min-height: 340px;
   display: flex;
   flex-direction: column;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+/* Hover (and keyboard focus) lifts the card and reveals the full quote —
+   .quote's line-clamp is lifted below, and align-items: flex-start above
+   lets this one card grow taller without dragging its neighbors along. */
+.story:hover,
+.story:focus-within {
+  z-index: 3;
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(5, 41, 97, 0.16);
 }
 .story:nth-child(3n + 1) {
   background: #fff;
@@ -826,6 +861,16 @@ header {
   font-family: Poppins, Inter, sans-serif;
   font-weight: 500;
   margin: 16px 0 28px;
+  /* Long testimonials otherwise balloon this card's height — since the
+     cards sit in one flex row, that stretches every other card to match
+     (align-items defaults to stretch), leaving short quotes with a big
+     awkward gap above the avatar. Clamp to a fixed number of lines so
+     every card stays a consistent height regardless of quote length. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
 }
 .person {
   display: flex;
@@ -847,6 +892,43 @@ header {
 .person .role {
   color: var(--muted);
   font-size: 0.74rem;
+}
+
+/* Floating "read full testimonial" popover — appended to <body> and
+   position: fixed (not absolute) so it escapes .stories-grid's
+   overflow-x: auto, which would otherwise clip anything overflowing it
+   vertically. JS positions it over whichever card is hovered/focused. */
+.story-popover {
+  position: fixed;
+  z-index: 60;
+  width: min(440px, calc(100vw - 32px));
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow:
+    0 30px 70px rgba(5, 41, 97, 0.26),
+    0 4px 16px rgba(5, 41, 97, 0.12);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.94);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+}
+.story-popover.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+.story-popover .quote {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+}
+.story-popover .person {
+  margin-top: 20px;
 }
 
 /* ---------- flexible ---------- */

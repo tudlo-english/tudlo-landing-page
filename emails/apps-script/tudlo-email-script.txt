@@ -1,27 +1,79 @@
 function sendBatchFromCsv() {
-  const TEMPLATE_URL = 'https://bonax12.github.io/tudlo-landing-page/emails/inquiry-reply.html';
-  const CSV_URL      = 'https://bonax12.github.io/tudlo-landing-page/emails/apps-script/clients.csv';
+  const TEMPLATE_URL = 'https://tudlo-english.github.io/tudlo-landing-page/emails/inquiry-reply.html';
+  const CSV_URL      = 'https://tudlo-english.github.io/tudlo-landing-page/emails/apps-script/clients.csv';
 
   const template = UrlFetchApp.fetch(TEMPLATE_URL).getContentText();
   const rows = Utilities.parseCsv(UrlFetchApp.fetch(CSV_URL).getContentText());
   const head = rows.shift();
   const iName = head.indexOf('name');
   const iMail = head.indexOf('email');
+  if (iName < 0 || iMail < 0) {
+    throw new Error('clients.csv header row must contain: name, email');
+  }
 
   const store = PropertiesService.getScriptProperties();
+  let sent = 0, skipped = 0, failed = 0;
 
-  rows.forEach(row => {
+  rows.forEach((row, r) => {
     const email = String(row[iMail] || '').trim();
-    if (!email || store.getProperty('sent:' + email)) return;   // skip empty / already sent
+    if (!email) return; // blank/trailing row, nothing to log
+
+    if (store.getProperty('sent:' + email)) {
+      Logger.log('Row %s: skipped (already sent) — %s', r + 2, email);
+      skipped++;
+      return;
+    }
 
     const name = String(row[iName] || 'there').trim() || 'there';
     const html = template.replace(/\{\{\s*first_name\s*\}\}/g, name);
 
-    GmailApp.sendEmail(email, 'Thanks for reaching out to Tudlo',
-      'Hi ' + name + ', thanks for your interest in Tudlo.',
-      { htmlBody: html, name: 'Tudlo' });
+    try {
+      GmailApp.sendEmail(email, 'Thanks for reaching out to Tudlo',
+        'Hi ' + name + ', thanks for your interest in Tudlo.',
+        { htmlBody: html, name: 'Tudlo' });
 
-    store.setProperty('sent:' + email, new Date().toISOString());
-    Utilities.sleep(1200);
+      store.setProperty('sent:' + email, new Date().toISOString());
+      Logger.log('Row %s: sent to %s <%s>', r + 2, name, email);
+      sent++;
+    } catch (err) {
+      // Don't let one bad address (e.g. GmailApp quota, invalid address) stop the batch.
+      Logger.log('Row %s: FAILED for %s — %s', r + 2, email, err.message);
+      failed++;
+    }
+
+    Utilities.sleep(1200); // be gentle with Gmail's rate limits
   });
+
+  Logger.log('Batch done. sent=%s skipped=%s failed=%s', sent, skipped, failed);
+}
+
+/**
+ * Force-resend to one address regardless of the "already sent" flag —
+ * use this to confirm delivery without clearing anyone else's tracking.
+ */
+function resendOne(email, name) {
+  const TEMPLATE_URL = 'https://tudlo-english.github.io/tudlo-landing-page/emails/inquiry-reply.html';
+  const template = UrlFetchApp.fetch(TEMPLATE_URL).getContentText();
+  const displayName = String(name || 'there').trim() || 'there';
+  const html = template.replace(/\{\{\s*first_name\s*\}\}/g, displayName);
+
+  GmailApp.sendEmail(email, 'Thanks for reaching out to Tudlo',
+    'Hi ' + displayName + ', thanks for your interest in Tudlo.',
+    { htmlBody: html, name: 'Tudlo' });
+
+  PropertiesService.getScriptProperties()
+    .setProperty('sent:' + email, new Date().toISOString());
+  Logger.log('Resent to %s <%s>', displayName, email);
+}
+
+/** Clear the "already sent" flag for one address, or all of them if none given. */
+function clearSentFlag(email) {
+  const store = PropertiesService.getScriptProperties();
+  if (email) {
+    store.deleteProperty('sent:' + email);
+    Logger.log('Cleared sent flag for %s', email);
+  } else {
+    store.deleteAllProperties();
+    Logger.log('Cleared all sent flags');
+  }
 }
