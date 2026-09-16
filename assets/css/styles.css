@@ -1110,20 +1110,36 @@ footer {
 }
 .foot {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 25px;
+  flex-wrap: wrap;
+  gap: 20px 25px;
 }
 .foot img {
   width: 150px;
   height: 60px;
   object-fit: contain;
+  flex: none;
 }
+/* Primary nav links and legal/policy links as two separate rows, so the
+   footer reads as organized instead of one long wrapping list of 9 links. */
 .foot-links {
   display: flex;
-  gap: 20px;
-  font-size: 0.8rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 11px;
+  min-width: 0;
+}
+.foot-links-row {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 20px;
+  font-size: 0.8rem;
+}
+.foot-links-legal {
+  color: #90a8ce;
+  font-size: 0.74rem;
 }
 .foot-links a:hover {
   color: #fff;
@@ -1570,5 +1586,12 @@ mark.todo {
   .foot {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .foot-links {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .foot-links-row {
+    justify-content: flex-start;
   }
 }
