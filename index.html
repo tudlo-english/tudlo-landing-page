@@ -873,6 +873,9 @@
       };
       const showStoryPopover = (card) => {
         clearTimeout(popoverHideTimer);
+        // Match the popover's background to the hovered card's own color
+        // (white / sky / mint, per its nth-child) instead of always white.
+        storyPopover.style.background = getComputedStyle(card).backgroundColor;
         storyPopover.innerHTML =
           card.querySelector(".eyebrow").outerHTML +
           '<div class="quote-mark">"</div><blockquote class="quote">' +
