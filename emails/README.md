@@ -16,7 +16,6 @@ buttons.
    with the hosted URLs, e.g.
    `https://<username>.github.io/<repo>/emails/assets/tudlo-logo.png`.
 3. Replace the other placeholders:
-   - `https://calendar.app.google/REPLACE-WITH-YOUR-BOOKING-LINK`
    - `https://t.me/REPLACE_TELEGRAM_USERNAME`
    - `https://wa.me/REPLACE_WHATSAPP_NUMBER` (country code + number, digits only)
    - `https://YOUR-DOMAIN.com`, `hello@YOUR-DOMAIN.com`

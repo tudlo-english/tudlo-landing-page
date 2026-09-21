@@ -66,7 +66,25 @@ function resendOne(email, name) {
   Logger.log('Resent to %s <%s>', displayName, email);
 }
 
-/** Clear the "already sent" flag for one address, or all of them if none given. */
+/**
+ * One-click test send. The Apps Script Run button can't pass arguments, so
+ * resendOne() alone fails with an undefined email — edit the two values below
+ * and run testSend instead. Bypasses the "already sent" flag.
+ */
+function testSend() {
+  resendOne('remorerasbab@gmail.com', 'Bryan'); // <- your own inbox + first name
+}
+
+/** Clear the sent flag for the test address only, so sendBatchFromCsv will pick it up again. */
+function clearTestFlag() {
+  clearSentFlag('remorerasbab@gmail.com'); // <- same address as testSend
+}
+
+/**
+ * Clear the "already sent" flag for one address, or ALL of them if none given.
+ * Don't run this straight from the editor's Run button (no arguments = wipes
+ * every flag, and the next sendBatchFromCsv re-emails every client in the CSV).
+ */
 function clearSentFlag(email) {
   const store = PropertiesService.getScriptProperties();
   if (email) {
