@@ -8,18 +8,14 @@ buttons.
 
 ### Before sending
 
-1. **Host the images.** Email clients can't use local files, and Gmail/Outlook
-   block base64. Deploy this repo (e.g. GitHub Pages) so these become public:
-   - `emails/assets/tudlo-logo.png`
-   - `emails/assets/tudlo-logo-white.png`
-2. In `inquiry-reply.html`, replace both `<img src="data:image/png;base64,…">`
-   with the hosted URLs, e.g.
-   `https://<username>.github.io/<repo>/emails/assets/tudlo-logo.png`.
-3. Replace the other placeholders:
-   - `https://t.me/REPLACE_TELEGRAM_USERNAME`
-   - `https://wa.me/REPLACE_WHATSAPP_NUMBER` (country code + number, digits only)
-   - `https://YOUR-DOMAIN.com`, `hello@YOUR-DOMAIN.com`
-   - `{{first_name}}` — leave it; the send script fills it in per client.
+All images (logos and button icons) are hosted PNGs in `emails/assets/`, served
+from `https://tudlo-english.com/emails/assets/`. Gmail/Outlook block base64
+images and inline SVG, so keep them as hosted `<img>` tags.
+
+- After changing anything in `emails/`, commit and push — the send script
+  fetches the template from GitHub Pages, so changes only show up once Pages
+  has redeployed.
+- `{{first_name}}` — leave it; the send script fills it in per client.
 
 ### Sending
 
