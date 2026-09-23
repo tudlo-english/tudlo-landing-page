@@ -3,8 +3,8 @@
 ## `inquiry-reply.html`
 
 HTML email to reply to people who send an inquiry. Same branding as the landing
-page: services, a "Schedule on Google Calendar" CTA, and Telegram / WhatsApp
-buttons.
+page: services, a "Schedule a Zoom Meeting" CTA, and Telegram / WhatsApp /
+KakaoTalk buttons.
 
 ### Before sending
 

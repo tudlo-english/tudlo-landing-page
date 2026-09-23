@@ -19,7 +19,7 @@
     <!-- ?v= is a cache-buster — bump it whenever styles.css changes, or
          browsers (Safari especially) can keep serving a stale cached copy
          even after the new file is live on GitHub Pages. -->
-    <link rel="stylesheet" href="assets/css/styles.css?v=2" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=3" />
   </head>
   <body>
     <header>
@@ -261,7 +261,7 @@
           <div>
             <span class="eyebrow">Meet your teacher</span>
             <h2 class="heading heading-split">
-              <span>A Englishteacher who makes</span
+              <span>An English teacher who makes</span
               ><span>learning feel personal.</span>
             </h2>
             <p class="lead">
@@ -368,8 +368,8 @@
               <span class="eyebrow">A FAMILY'S ROUTINE</span>
               <div class="quote-mark">"</div>
               <blockquote class="quote">
-                The flexible schedule made all the difference. Tudlo works
-                around our week instead of adding pressure to it.
+                I have to tell you that we are so happy with you. Marina and
+                Begoña have had very good results
               </blockquote>
               <div class="person">
                 <img
@@ -378,7 +378,7 @@
                   loading="lazy"
                 />
                 <div>
-                  <b>Jose M.</b
+                  <b>Juan M.</b
                   ><span class="role">Parent of two Tudlo learners</span>
                 </div>
               </div>
@@ -444,6 +444,33 @@
                   loading="lazy"
                 />
                 <div><b>Yessi G.</b><span class="role">Psychologist</span></div>
+              </div>
+            </article>
+            <article class="story">
+              <span class="eyebrow">A working professional</span>
+              <div class="quote-mark">"</div>
+              <blockquote class="quote">
+                She is an incredible teacher. Her classes are dynamic,
+                well-structured, and genuinely engaging. What stands out most
+                about her is her ability to explain complex concepts clearly—she
+                breaks down tricky grammar points and makes them easy to grasp
+                right away. She adapts completely to your specific level and
+                individual needs. Whether you want to boost your conversational
+                confidence, prepare for an exam, or focus on professional
+                English, she tailors every lesson to your personal goals and
+                learning pace. Her patience, encouragement, and supportive
+                approach make you feel completely comfortable making mistakes
+                and speaking up. I couldn't recommend her more highly!
+              </blockquote>
+              <div class="person">
+                <img
+                  src="assets/images/student-maria.jpg"
+                  alt="Maria"
+                  loading="lazy"
+                />
+                <div>
+                  <b>Inma M.</b><span class="role">Procurement Manager</span>
+                </div>
               </div>
             </article>
           </div>
@@ -624,7 +651,7 @@
         <p>© 2026 Tudlo · Learn English. Build confidence. Reach your goals.</p>
         <p>
           Tudlo is an independent online English tutoring service operated by
-          Aivy F. Yllanan, Philippines. Contact:
+          Aivy F. Ylanan, Philippines. Contact:
           <a href="mailto:support.tudlo@gmail.com">support.tudlo@gmail.com</a>.
         </p>
       </div>
@@ -681,6 +708,30 @@
                 required
                 type="email"
                 placeholder="you@example.com"
+              />
+            </div>
+            <div class="field">
+              <label for="messenger">Preferred messaging app</label
+              ><select
+                id="messenger"
+                class="messenger"
+                name="messenger"
+                data-app="WhatsApp"
+              >
+                <option selected>WhatsApp</option>
+                <option>Telegram</option>
+                <option>KakaoTalk</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="messengerContact">Your number</label
+              ><input
+                id="messengerContact"
+                name="messenger_contact"
+                type="tel"
+                autocomplete="tel"
+                placeholder="e.g. +82 10 1234 5678"
+                required
               />
             </div>
             <div class="field">
@@ -910,6 +961,14 @@
 
       const bookingForm = document.getElementById("form"),
         formMsg = document.getElementById("success");
+
+      // Show the chosen messaging app's icon inside the dropdown.
+      const messenger = document.getElementById("messenger");
+      const syncMessenger = () => {
+        messenger.dataset.app = messenger.value;
+      };
+      messenger.addEventListener("change", syncMessenger);
+      bookingForm.addEventListener("reset", () => setTimeout(syncMessenger));
       bookingForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const btn = bookingForm.querySelector('button[type="submit"]');
