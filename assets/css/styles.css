@@ -610,6 +610,7 @@ header {
     calc(100% + 100vw - min(var(--max), 100vw - 40px) - 16px)
   );
   max-height: 740px;
+  flex-shrink: 0;
   object-fit: contain;
   display: block;
   align-self: flex-end;
@@ -1117,16 +1118,6 @@ details p {
   align-items: stretch;
   gap: 12px;
   max-width: 300px;
-}
-.btn-kakao {
-  background: #fee500;
-  color: #191919;
-  box-shadow: 0 4px 12px rgba(4, 38, 94, 0.15);
-}
-.kakao-hint {
-  margin: 0;
-  font-size: 0.85rem;
-  text-align: center;
 }
 
 /* ---------- footer ---------- */
@@ -1663,5 +1654,82 @@ mark.todo {
   }
   .foot-links-row {
     justify-content: flex-start;
+  }
+}
+
+/* ---------- motion ----------
+   Uses the standalone `translate` property (not `transform`) so entrance
+   animations never fight the hover lifts that already use `transform`. */
+:root {
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--rise, 22px);
+  }
+}
+
+/* Hero: plays once on load, pure CSS. The photo itself stays static so the
+   largest image paints immediately. */
+.hero-copy > * {
+  animation: rise 0.7s var(--ease) backwards;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 0.08s;
+}
+.hero-copy > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+.hero-copy > :nth-child(4) {
+  animation-delay: 0.24s;
+}
+.bubble {
+  animation: rise 0.7s var(--ease) 0.45s backwards;
+}
+.bubble.two {
+  animation-delay: 0.6s;
+}
+
+/* Scroll reveal: the script adds .reveal, then .in when it enters view.
+   Without JS nothing is ever tagged, so content is never hidden. */
+.reveal:not(.in) {
+  opacity: 0;
+  translate: 0 22px;
+}
+.reveal.in {
+  animation: rise 0.65s var(--ease) var(--d, 0s) backwards;
+}
+
+/* Card image zoom, FAQ answer fade */
+.journey-card img {
+  transition: transform 0.6s var(--ease);
+}
+@media (hover: hover) {
+  .journey-card:hover img {
+    transform: scale(1.05);
+  }
+}
+details[open] > :not(summary) {
+  --rise: 8px;
+  animation: rise 0.3s ease backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy > *,
+  .bubble,
+  .reveal.in,
+  details[open] > :not(summary) {
+    animation: none;
+  }
+  .reveal:not(.in) {
+    opacity: 1;
+    translate: none;
+  }
+  .journey-card img {
+    transition: none;
+  }
+  .journey-card:hover img {
+    transform: none;
   }
 }
