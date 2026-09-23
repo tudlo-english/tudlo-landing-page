@@ -19,7 +19,7 @@
     <!-- ?v= is a cache-buster — bump it whenever styles.css changes, or
          browsers (Safari especially) can keep serving a stale cached copy
          even after the new file is live on GitHub Pages. -->
-    <link rel="stylesheet" href="assets/css/styles.css?v=3" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=4" />
   </head>
   <body>
     <header>
@@ -250,7 +250,7 @@
         <div class="wrap teacher-grid">
           <div class="teacher-photo">
             <img
-              src="assets/images/aivy-img.png"
+              src="assets/images/aivy-img-new.png"
               alt="Tudlo founder and English teacher"
               loading="lazy"
             />
@@ -623,10 +623,22 @@
               you find the right path.
             </p>
           </div>
-          <button class="btn btn-white js-open">
-            Talk to a learning advisor
-            <span class="ico-arrow" aria-hidden="true"></span>
-          </button>
+          <div class="cta-actions">
+            <button class="btn btn-white js-open">
+              Talk to a learning advisor
+              <span class="ico-arrow" aria-hidden="true"></span>
+            </button>
+            <button
+              class="btn btn-kakao js-kakao"
+              type="button"
+              data-kakao-id="teacheraivy"
+            >
+              Chat on KakaoTalk
+            </button>
+            <p class="kakao-hint" aria-live="polite">
+              KakaoTalk ID: <strong>teacheraivy</strong>
+            </p>
+          </div>
         </div>
       </section>
     </main>
@@ -957,6 +969,23 @@
       storyPopover.addEventListener("mouseleave", hideStoryPopoverSoon);
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") hideStoryPopoverSoon();
+      });
+
+      // KakaoTalk has no link to a personal chat, so copy the ID and open the app.
+      document.querySelectorAll(".js-kakao").forEach((btn) => {
+        const hint = btn.parentElement.querySelector(".kakao-hint");
+        btn.addEventListener("click", async () => {
+          const id = btn.dataset.kakaoId;
+          try {
+            await navigator.clipboard.writeText(id);
+            hint.innerHTML = `ID <strong>${id}</strong> copied. In KakaoTalk, tap Add Friend → ID and paste it.`;
+          } catch {
+            hint.innerHTML = `In KakaoTalk, tap Add Friend → ID and search <strong>${id}</strong>.`;
+          }
+          if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            window.location.href = "kakaotalk://";
+          }
+        });
       });
 
       const bookingForm = document.getElementById("form"),

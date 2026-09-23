@@ -601,12 +601,19 @@ header {
   justify-content: center;
 }
 .teacher-photo img {
-  width: 100%;
-  max-width: 540px;
-  max-height: 700px;
+  width: 120%;
+  /* Spill past the column into the page margin, but stop 8px short of the
+     screen edge — on laptop widths the margin is only 20px, so an uncapped
+     120% would cut off the laptop corner. */
+  max-width: min(
+    600px,
+    calc(100% + 100vw - min(var(--max), 100vw - 40px) - 16px)
+  );
+  max-height: 740px;
   object-fit: contain;
   display: block;
   align-self: flex-end;
+  padding-bottom: 40px;
   /* The source photo has a hard black/orange background — fade it out at the
      edges so it blends into the section's white background instead of
      showing as a rectangle. */
@@ -1101,6 +1108,26 @@ details p {
   z-index: 1;
   flex: none;
 }
+.cta-actions {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 300px;
+}
+.btn-kakao {
+  background: #fee500;
+  color: #191919;
+  box-shadow: 0 4px 12px rgba(4, 38, 94, 0.15);
+}
+.kakao-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
 
 /* ---------- footer ---------- */
 footer {
@@ -1362,8 +1389,9 @@ footer {
   .cta-box {
     display: block;
   }
-  .cta-box .btn {
+  .cta-actions {
     margin-top: 22px;
+    max-width: none;
   }
 }
 /* ---------- form consent ---------- */
