@@ -1406,6 +1406,9 @@ footer {
   color: var(--blue);
   text-decoration: underline;
 }
+.captcha-wrap {
+  margin-top: 16px;
+}
 
 /* ---------- footer legal notice ---------- */
 .fine p {

@@ -765,6 +765,9 @@
               />
             </div>
           </div>
+          <div class="captcha-wrap">
+            <div class="h-captcha" data-captcha="true"></div>
+          </div>
           <label class="consent">
             <input
               type="checkbox"
@@ -973,6 +976,15 @@
       bookingForm.addEventListener("reset", () => setTimeout(syncMessenger));
       bookingForm.addEventListener("submit", async (e) => {
         e.preventDefault();
+        const hCaptchaResponse = bookingForm.querySelector(
+          'textarea[name="h-captcha-response"]',
+        );
+        if (!hCaptchaResponse || !hCaptchaResponse.value) {
+          formMsg.textContent = "Please complete the captcha challenge.";
+          formMsg.classList.add("is-error");
+          formMsg.style.display = "block";
+          return;
+        }
         const btn = bookingForm.querySelector('button[type="submit"]');
         const btnHtml = btn.innerHTML;
         btn.disabled = true;
@@ -1077,5 +1089,6 @@
           });
       }
     </script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
   </body>
 </html>
