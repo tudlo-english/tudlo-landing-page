@@ -824,6 +824,7 @@
         shut = () => {
           modal.classList.remove("show");
           modal.setAttribute("aria-hidden", "true");
+          resetBookingForm();
         };
       document.querySelectorAll(".js-open").forEach((x) =>
         x.addEventListener("click", (e) => {
@@ -965,7 +966,24 @@
       });
 
       const bookingForm = document.getElementById("form"),
-        formMsg = document.getElementById("success");
+        formMsg = document.getElementById("success"),
+        submitBtn = bookingForm.querySelector('button[type="submit"]'),
+        submitBtnDefaultHtml = submitBtn.innerHTML;
+
+      const resetBookingForm = () => {
+        bookingForm.reset();
+        formMsg.style.display = "none";
+        formMsg.classList.remove("is-error");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnDefaultHtml;
+        // Native form.reset() clears the hidden h-captcha-response value but
+        // leaves the widget showing a stale "verified" checkbox.
+        if (window.hcaptcha) {
+          try {
+            window.hcaptcha.reset();
+          } catch (err) {}
+        }
+      };
 
       // Show the chosen messaging app's icon inside the dropdown.
       const messenger = document.getElementById("messenger");
@@ -985,10 +1003,8 @@
           formMsg.style.display = "block";
           return;
         }
-        const btn = bookingForm.querySelector('button[type="submit"]');
-        const btnHtml = btn.innerHTML;
-        btn.disabled = true;
-        btn.textContent = "Sending…";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
         formMsg.style.display = "none";
         formMsg.classList.remove("is-error");
         try {
@@ -1003,14 +1019,19 @@
             "Thank you! A Tudlo learning advisor will be in touch soon.";
           formMsg.style.display = "block";
           bookingForm.reset();
-          btn.textContent = "Request sent ✓";
+          if (window.hcaptcha) {
+            try {
+              window.hcaptcha.reset();
+            } catch (err) {}
+          }
+          submitBtn.textContent = "Request sent ✓";
         } catch (err) {
           formMsg.textContent =
             "Sorry, that didn't send. Please try again, or email support.tudlo@gmail.com.";
           formMsg.classList.add("is-error");
           formMsg.style.display = "block";
-          btn.disabled = false;
-          btn.innerHTML = btnHtml;
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitBtnDefaultHtml;
         }
       });
 
