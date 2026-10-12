@@ -1,0 +1,560 @@
+/* Tudlo Tracker landing page (tudlo-tracker.html).
+   Loaded AFTER styles.css, which already provides the tokens, header,
+   buttons, eyebrow, steps, FAQ, CTA and footer. Only what is new lives here. */
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 10px 20px rgba(255, 196, 0, 0.28);
+}
+.nav-cta {
+  font-size: 0.83rem;
+  padding: 11px 18px;
+}
+.foot-links a[aria-current="page"] {
+  color: #fff;
+}
+.t-link {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* eyebrows here can wrap on a phone instead of forcing a sideways scroll */
+.t-hero .eyebrow,
+.t-head .eyebrow {
+  white-space: normal;
+}
+
+/* ---------- section heads ---------- */
+.t-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 8px;
+}
+.t-head .eyebrow {
+  justify-content: center;
+}
+.t-head .eyebrow:before {
+  display: none;
+}
+.t-head h2 {
+  margin: 14px 0;
+}
+.t-head .lead {
+  margin: 0 auto;
+}
+.t-head-left {
+  text-align: left;
+  max-width: none;
+  margin: 0 0 34px;
+}
+.t-head-left .eyebrow {
+  justify-content: flex-start;
+}
+.t-head-left .eyebrow:before {
+  display: block;
+}
+
+/* ---------- hero ---------- */
+.t-hero {
+  padding: 64px 0 70px;
+  overflow: hidden; /* the floating chips overhang the screenshot */
+}
+.t-hero-copy {
+  text-align: center;
+  max-width: 940px;
+  margin: 0 auto;
+}
+.t-hero-copy .eyebrow {
+  justify-content: center;
+}
+.t-hero-copy .eyebrow:before {
+  display: none;
+}
+.t-hero h1.heading {
+  font-size: clamp(2.1rem, 5.4vw, 4.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  margin: 18px 0 20px;
+  text-wrap: balance;
+}
+.t-head h2,
+.t-private h2,
+.faq h2 {
+  text-wrap: balance;
+}
+.t-hero .lead {
+  margin: 0 auto;
+  max-width: 640px;
+  font-size: 1.08rem;
+}
+.t-hero .hero-actions {
+  justify-content: center;
+}
+.t-hero-copy .tiny {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 16px;
+}
+.t-hero-shot {
+  position: relative;
+  max-width: 1080px;
+  margin: 54px auto 0;
+}
+.shot {
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 34px 80px rgba(5, 41, 97, 0.2);
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.t-hero-shot .bubble.one {
+  top: -26px;
+  left: 36px;
+}
+.t-hero-shot .bubble.two {
+  right: 36px;
+  bottom: -26px;
+}
+
+/* ---------- at-a-glance strip ---------- */
+.t-strip {
+  background: #fff;
+  border-block: 1px solid var(--line);
+}
+.t-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.t-strip-grid > div {
+  padding: 26px 22px;
+  border-right: 1px solid var(--line);
+  min-width: 0;
+}
+.t-strip-grid > div:first-child {
+  padding-left: 0;
+}
+.t-strip-grid > div:last-child {
+  border-right: 0;
+}
+.t-strip-grid b {
+  display: block;
+  font-family: Poppins, Inter, sans-serif;
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+}
+.t-strip-grid span {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ---------- the five screens ---------- */
+.t-inside {
+  padding: 96px 0 40px;
+}
+.spot {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 60px;
+  align-items: center;
+  margin-top: 84px;
+}
+.spot > * {
+  min-width: 0;
+}
+.spot.flip {
+  grid-template-columns: 1.22fr 0.78fr;
+}
+.spot.flip .spot-copy {
+  order: 2;
+}
+.spot-num {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: var(--gold);
+  font-weight: 800;
+  font-family: Poppins, Inter, sans-serif;
+  font-size: 0.85rem;
+}
+.spot h3 {
+  font-size: clamp(1.6rem, 2.7vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  margin: 20px 0 12px;
+}
+.spot-copy > p {
+  color: var(--muted);
+  font-size: 1rem;
+}
+.spot-copy > p b {
+  color: var(--ink);
+}
+.spot-art {
+  border-radius: 28px;
+  padding: 28px;
+}
+.spot-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(10, 42, 99, 0.08);
+  box-shadow: 0 18px 40px rgba(5, 41, 97, 0.16);
+}
+.spot-art-doc {
+  display: flex;
+  justify-content: center;
+  padding-block: 32px;
+}
+.spot-art-doc img {
+  width: auto;
+  max-width: min(100%, 340px);
+}
+.tint-sky {
+  background: var(--sky);
+}
+.tint-mint {
+  background: var(--mint);
+}
+.tint-lilac {
+  background: var(--lilac);
+}
+.tint-peach {
+  background: var(--peach);
+}
+
+/* ticked lists (screens and pricing) */
+.ticks {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.ticks li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.ticks li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--mint);
+  color: #0a7a45;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+/* ---------- more features ---------- */
+.t-more {
+  padding: 56px 0 96px;
+}
+.t-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.t-card {
+  border-radius: 18px;
+  padding: 26px;
+  min-height: 190px;
+  transition:
+    0.25s transform,
+    0.25s box-shadow;
+}
+.t-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(4, 38, 94, 0.12);
+}
+.t-card:nth-child(1),
+.t-card:nth-child(5) {
+  background: var(--peach);
+}
+.t-card:nth-child(2),
+.t-card:nth-child(6) {
+  background: var(--sky);
+}
+.t-card:nth-child(3) {
+  background: var(--mint);
+}
+.t-card:nth-child(4) {
+  background: var(--lilac);
+}
+.t-card h3 {
+  font-size: 1.02rem;
+  letter-spacing: -0.02em;
+  margin: 18px 0 6px;
+  font-weight: 700;
+}
+.t-card p {
+  font-size: 0.86rem;
+  color: #4f607c;
+}
+
+/* ---------- private by design ---------- */
+.t-private {
+  background: var(--ink-2);
+  color: #fff;
+  padding: 96px 0;
+  overflow: hidden;
+}
+.t-private-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+}
+.t-private-grid > * {
+  min-width: 0;
+}
+.t-private .eyebrow {
+  color: #fff;
+}
+.t-private h2 {
+  margin: 14px 0 18px;
+}
+.t-private .lead {
+  color: #c9d8f0;
+}
+.t-private-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 30px 70px rgba(0, 10, 40, 0.5);
+}
+
+/* ---------- pricing ---------- */
+.t-pricing {
+  padding: 96px 0;
+  background: var(--paper);
+}
+.plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 880px;
+  margin: 54px auto 0;
+}
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 36px 34px 34px;
+  box-shadow: 0 14px 34px rgba(4, 38, 94, 0.07);
+  min-width: 0;
+}
+.plan h3 {
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+.plan-for {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+.price {
+  font-family: Inter, sans-serif;
+  font-weight: 900;
+  font-size: 3.7rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  margin-top: 26px;
+}
+.price .cur {
+  font-size: 1.9rem;
+  font-weight: 800;
+  vertical-align: 0.9em;
+  margin-right: 3px;
+  letter-spacing: 0;
+}
+.price small {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  opacity: 0.55;
+}
+.per {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.plan .ticks {
+  flex: 1;
+  margin: 26px 0 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.plan .btn {
+  width: 100%;
+}
+.plan-best {
+  background: linear-gradient(150deg, var(--blue), var(--blue-deep));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 30px 60px rgba(13, 91, 214, 0.32);
+}
+.plan-best .plan-for,
+.plan-best .per {
+  color: #cfe0ff;
+}
+.plan-best .ticks {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+.plan-best .ticks li:before {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--gold);
+}
+.plan-badge {
+  position: absolute;
+  top: -14px;
+  left: 34px;
+  background: var(--gold);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 15px;
+  font-family: Poppins, Inter, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px rgba(4, 24, 66, 0.2);
+}
+.plans-note {
+  max-width: 640px;
+  margin: 30px auto 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+/* the shared CTA title is nowrap with block spans; this one is plain text */
+.cta-box .t-cta-title {
+  white-space: normal;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .t-hero-shot .bubble.one {
+    left: 14px;
+  }
+  .t-hero-shot .bubble.two {
+    right: 14px;
+  }
+  .t-strip-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .t-strip-grid > div:nth-child(2) {
+    border-right: 0;
+  }
+  .t-strip-grid > div:nth-child(1),
+  .t-strip-grid > div:nth-child(2) {
+    border-bottom: 1px solid var(--line);
+  }
+  .t-strip-grid > div:nth-child(3) {
+    padding-left: 0;
+  }
+  .spot,
+  .spot.flip,
+  .t-private-grid {
+    grid-template-columns: 1fr;
+  }
+  .spot,
+  .spot.flip {
+    gap: 28px;
+    margin-top: 64px;
+  }
+  .spot.flip .spot-copy {
+    order: 0;
+  }
+  .t-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+  .t-private-grid {
+    gap: 36px;
+  }
+}
+@media (max-width: 700px) {
+  .plans {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+@media (max-width: 560px) {
+  .t-hero {
+    padding: 44px 0 48px;
+  }
+  .t-hero-shot {
+    margin-top: 40px;
+  }
+  .t-hero-shot .bubble {
+    display: none; /* the screenshot is small here; chips would cover it */
+  }
+  .shot {
+    border-radius: 14px;
+  }
+  .t-inside {
+    padding: 66px 0 24px;
+  }
+  .spot-art {
+    padding: 14px;
+    border-radius: 20px;
+  }
+  .spot-art-doc {
+    padding-block: 20px;
+  }
+  .t-more,
+  .t-private,
+  .t-pricing {
+    padding: 66px 0;
+  }
+  .t-more {
+    padding-top: 40px;
+  }
+  .t-cards {
+    grid-template-columns: 1fr;
+  }
+  .t-card {
+    min-height: 0;
+  }
+  .plan {
+    padding: 32px 24px 28px;
+  }
+  .plan-badge {
+    left: 24px;
+  }
+  .price {
+    font-size: 3.2rem;
+  }
+  .nav-cta {
+    padding: 10px 14px;
+  }
+}
