@@ -20,7 +20,7 @@
          the tracker-only layer. ?v= is a cache-buster — bump it when the
          file changes. Keep styles.css at the same version as index.html. -->
     <link rel="stylesheet" href="assets/css/styles.css?v=7" />
-    <link rel="stylesheet" href="assets/css/tracker.css?v=1" />
+    <link rel="stylesheet" href="assets/css/tracker.css?v=2" />
   </head>
   <body>
     <header>
@@ -28,7 +28,7 @@
         <a class="logo" href="/" aria-label="Tudlo home"
           ><img src="assets/logo/tudlo-logo-1.png" alt="Tudlo"
         /></a>
-        <a class="btn btn-blue nav-cta" href="#pricing"
+        <a class="btn btn-blue nav-cta" href="#pricing" data-open
           >Get Tudlo Tracker
           <span class="ico-arrow" aria-hidden="true"></span
         ></a>
@@ -336,9 +336,9 @@
               <div class="step-number">01</div>
               <h3>Choose your plan</h3>
               <p>
-                Pick 1 or 2 years and message us. Tell us whether you use a Mac
-                (Apple chip or Intel) or Windows, and we'll send the right
-                installer.
+                Pick 1 or 2 years and send us the short request form. Tell us
+                whether you use a Mac (Apple chip or Intel) or Windows, and
+                we'll send the right installer.
               </p>
             </article>
             <article class="step">
@@ -387,6 +387,8 @@
               </ul>
               <a
                 class="btn btn-blue"
+                data-open
+                data-plan="1"
                 href="mailto:support.tudlo@gmail.com?subject=Tudlo%20Tracker%20%E2%80%94%201%20year%20license&amp;body=Hi%20Tudlo%2C%0A%0AI'd%20like%20the%201-year%20Tudlo%20Tracker%20license%20(%E2%82%B1499.00).%0A%0AName%3A%20%0AMy%20computer%20(Mac%20with%20Apple%20chip%20%2F%20Mac%20with%20Intel%20%2F%20Windows)%3A%20%0A"
                 >Get 1 year
                 <span class="ico-arrow" aria-hidden="true"></span
@@ -407,6 +409,8 @@
               </ul>
               <a
                 class="btn btn-gold"
+                data-open
+                data-plan="2"
                 href="mailto:support.tudlo@gmail.com?subject=Tudlo%20Tracker%20%E2%80%94%202%20year%20license&amp;body=Hi%20Tudlo%2C%0A%0AI'd%20like%20the%202-year%20Tudlo%20Tracker%20license%20(%E2%82%B1799.00).%0A%0AName%3A%20%0AMy%20computer%20(Mac%20with%20Apple%20chip%20%2F%20Mac%20with%20Intel%20%2F%20Windows)%3A%20%0A"
                 >Get 2 years
                 <span class="ico-arrow" aria-hidden="true"></span
@@ -500,12 +504,12 @@
             >
             <h2 class="t-cta-title">Get organised with Tudlo Tracker.</h2>
             <p>
-              1 year for ₱499.00 or 2 years for ₱799.00. Message us and we'll
-              get you set up.
+              1 year for ₱499.00 or 2 years for ₱799.00. Send us a request and
+              we'll get you set up.
             </p>
           </div>
           <div class="cta-actions">
-            <a class="btn btn-white" href="#pricing"
+            <a class="btn btn-white" href="#pricing" data-open
               >Choose your plan
               <span class="ico-arrow" aria-hidden="true"></span
             ></a>
@@ -540,6 +544,171 @@
       </div>
     </footer>
 
+    <!-- ORDER REQUEST MODAL — same Web3Forms setup as the main Tudlo page.
+         Every [data-open] button opens it; [data-plan] preselects the plan,
+         otherwise the 2-year plan is the default. -->
+    <div class="modal-backdrop" id="modal" aria-hidden="true">
+      <section
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button
+        ><span class="eyebrow">Get Tudlo Tracker</span>
+        <h2 id="modalTitle">Let's get you set up.</h2>
+        <p>
+          Choose your plan and tell us how to reach you. We'll message you with
+          the next steps.
+        </p>
+        <form id="form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Submissions are delivered to support.tudlo@gmail.com
+               (same Web3Forms access key as the main page). -->
+          <input
+            type="hidden"
+            name="access_key"
+            value="647b317e-a452-4b34-850e-eac32e772c2b"
+          />
+          <input
+            type="hidden"
+            id="subject"
+            name="subject"
+            value="New Tudlo Tracker request"
+          />
+          <input type="hidden" name="from_name" value="Tudlo Tracker Page" />
+          <!-- honeypot: real people never fill this; bots do -->
+          <input
+            type="checkbox"
+            name="botcheck"
+            style="display: none"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+
+          <div class="field full">
+            <span class="field-label" id="planLabel">Your plan</span>
+            <div class="plan-pick" role="radiogroup" aria-labelledby="planLabel">
+              <label class="plan-opt">
+                <input
+                  type="radio"
+                  name="plan"
+                  value="1 year — ₱499.00"
+                  data-plan="1"
+                  required
+                />
+                <span class="plan-opt-card">
+                  <b>1 year</b>
+                  <em>₱499.00</em>
+                </span>
+              </label>
+              <label class="plan-opt">
+                <input
+                  type="radio"
+                  name="plan"
+                  value="2 years — ₱799.00"
+                  data-plan="2"
+                  checked
+                />
+                <span class="plan-opt-card">
+                  <b>2 years</b>
+                  <em>₱799.00</em>
+                  <i>Best value</i>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Your name</label
+              ><input
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Your name"
+              />
+            </div>
+            <div class="field">
+              <label for="email">Email address</label
+              ><input
+                id="email"
+                name="email"
+                required
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div class="field">
+              <label for="messenger">How should we contact you?</label
+              ><select
+                id="messenger"
+                class="messenger"
+                name="messenger"
+                data-app="WhatsApp"
+              >
+                <option selected>WhatsApp</option>
+                <option>Telegram</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="messengerContact" id="contactLabel"
+                >WhatsApp number</label
+              ><input
+                id="messengerContact"
+                name="messenger_contact"
+                type="tel"
+                autocomplete="tel"
+                placeholder="e.g. +63 917 123 4567"
+                required
+              />
+            </div>
+            <div class="field full">
+              <label for="computer">Which computer will you use?</label
+              ><select id="computer" name="computer" required>
+                <option value="">Choose one</option>
+                <option>Mac with Apple chip (M1, M2, M3 or newer)</option>
+                <option>Mac with Intel processor</option>
+                <option>Windows PC</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div class="captcha-wrap">
+            <div class="h-captcha" data-captcha="true"></div>
+          </div>
+          <label class="consent">
+            <input
+              type="checkbox"
+              name="consent"
+              value="Agreed to the Privacy Policy and Terms &amp; Conditions"
+              required
+            />
+            <span
+              >I have read and agree to the
+              <a href="privacy-policy.html" target="_blank" rel="noopener"
+                >Privacy Policy</a
+              >
+              and
+              <a href="terms-and-conditions.html" target="_blank" rel="noopener"
+                >Terms &amp; Conditions</a
+              >.</span
+            >
+          </label>
+          <button
+            class="btn btn-blue"
+            type="submit"
+            style="width: 100%; margin-top: 18px"
+          >
+            Send my request <span class="ico-arrow" aria-hidden="true"></span>
+          </button>
+          <div class="success" id="success" role="status"></div>
+        </form>
+      </section>
+    </div>
+
     <script>
       // FAQ accordion — opening one question closes any other that's open.
       const faqItems = document.querySelectorAll(".faq-list details");
@@ -551,6 +720,137 @@
           });
         }),
       );
+
+      // Order request modal. Every [data-open] button opens it; a button with
+      // data-plan="1" or "2" preselects that plan, anything else gets the
+      // 2-year plan. Without JS these links still work (anchor / mailto).
+      const modal = document.getElementById("modal"),
+        modalClose = document.getElementById("modalClose"),
+        bookingForm = document.getElementById("form"),
+        formMsg = document.getElementById("success"),
+        submitBtn = bookingForm.querySelector('button[type="submit"]'),
+        submitBtnDefaultHtml = submitBtn.innerHTML,
+        subjectField = document.getElementById("subject"),
+        messenger = document.getElementById("messenger"),
+        contact = document.getElementById("messengerContact"),
+        contactLabel = document.getElementById("contactLabel");
+      let lastOpener = null;
+
+      const selectPlan = (plan) => {
+        const radio =
+          bookingForm.querySelector('input[name="plan"][data-plan="' + plan + '"]') ||
+          bookingForm.querySelector('input[name="plan"][data-plan="2"]');
+        radio.checked = true;
+      };
+      const openModal = (plan, opener) => {
+        lastOpener = opener || null;
+        selectPlan(plan);
+        modal.classList.add("show");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        setTimeout(() => document.getElementById("name").focus(), 30);
+      };
+      const resetBookingForm = () => {
+        bookingForm.reset();
+        formMsg.style.display = "none";
+        formMsg.classList.remove("is-error");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnDefaultHtml;
+        // Native form.reset() clears the hidden h-captcha-response value but
+        // leaves the widget showing a stale "verified" checkbox.
+        if (window.hcaptcha) {
+          try {
+            window.hcaptcha.reset();
+          } catch (err) {}
+        }
+      };
+      const closeModal = () => {
+        if (!modal.classList.contains("show")) return;
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        resetBookingForm();
+        if (lastOpener) lastOpener.focus();
+      };
+      document.querySelectorAll("[data-open]").forEach((el) =>
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal(el.dataset.plan, el);
+        }),
+      );
+      modalClose.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      // Show the chosen messaging app's icon, and ask for the right detail:
+      // WhatsApp needs a number, Telegram also works with an @username.
+      const syncMessenger = () => {
+        const telegram = messenger.value === "Telegram";
+        messenger.dataset.app = messenger.value;
+        contactLabel.textContent = telegram
+          ? "Telegram number or @username"
+          : "WhatsApp number";
+        contact.type = telegram ? "text" : "tel";
+        contact.autocomplete = telegram ? "off" : "tel";
+        contact.placeholder = telegram
+          ? "e.g. @yourname or +63 917 123 4567"
+          : "e.g. +63 917 123 4567";
+      };
+      messenger.addEventListener("change", syncMessenger);
+      bookingForm.addEventListener("reset", () => setTimeout(syncMessenger));
+
+      const showMsg = (text, isError) => {
+        formMsg.textContent = text;
+        formMsg.classList.toggle("is-error", !!isError);
+        formMsg.style.display = "block";
+      };
+      bookingForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const hCaptchaResponse = bookingForm.querySelector(
+          'textarea[name="h-captcha-response"]',
+        );
+        if (!hCaptchaResponse || !hCaptchaResponse.value) {
+          showMsg("Please complete the captcha challenge.", true);
+          return;
+        }
+        // Put the plan in the email subject so requests are easy to spot.
+        subjectField.value =
+          "New Tudlo Tracker request — " +
+          bookingForm.querySelector('input[name="plan"]:checked').value;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+        formMsg.style.display = "none";
+        formMsg.classList.remove("is-error");
+        try {
+          const res = await fetch(bookingForm.action, {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: new FormData(bookingForm),
+          });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.message || "Request failed");
+          const app = messenger.value; // read before reset() puts it back
+          bookingForm.reset();
+          if (window.hcaptcha) {
+            try {
+              window.hcaptcha.reset();
+            } catch (err) {}
+          }
+          showMsg("Thank you! We'll message you on " + app + " soon.");
+          submitBtn.textContent = "Request sent ✓";
+        } catch (err) {
+          showMsg(
+            "Sorry, that didn't send. Please try again, or email support.tudlo@gmail.com.",
+            true,
+          );
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitBtnDefaultHtml;
+        }
+      });
 
       // Scroll reveal — fade/slide blocks in once as they enter the viewport.
       // Without JS or IntersectionObserver nothing is tagged, so nothing hides.
@@ -590,5 +890,6 @@
           });
       }
     </script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
   </body>
 </html>
