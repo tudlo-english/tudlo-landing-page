@@ -1417,6 +1417,22 @@ footer {
 .fine p + p {
   margin-top: 8px;
 }
+/* Copyright on the left, design credit on the right; stacks when narrow. */
+.fine-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 20px;
+}
+.fine-top p + p {
+  margin-top: 0;
+}
+.fine-top + p {
+  margin-top: 8px;
+}
+.fine-credit {
+  color: #cad8ed;
+}
 .fine a {
   color: #cad8ed;
   text-decoration: underline;
