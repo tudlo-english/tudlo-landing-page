@@ -354,9 +354,9 @@
 }
 .plans {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 22px;
-  max-width: 880px;
+  max-width: 440px;
   margin: 54px auto 0;
 }
 .plan {
@@ -481,7 +481,7 @@ body.modal-open {
 }
 .plan-pick {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
   margin-bottom: 14px;
 }

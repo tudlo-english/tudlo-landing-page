@@ -36,8 +36,8 @@
       content="The Tudlo Tracker dashboard showing students, classes this week and payments at a glance"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Structured data: the app, its platforms and the two licence prices
-         that are already shown in the Pricing section. -->
+    <!-- Structured data: the app, its platforms and the licence price
+         that is already shown in the Pricing section. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -53,20 +53,12 @@
           "name": "Tudlo",
           "url": "https://tudlo-english.com/"
         },
-        "offers": [
-          {
-            "@type": "Offer",
-            "name": "1 year",
-            "price": "499.00",
-            "priceCurrency": "PHP"
-          },
-          {
-            "@type": "Offer",
-            "name": "2 years",
-            "price": "799.00",
-            "priceCurrency": "PHP"
-          }
-        ]
+        "offers": {
+          "@type": "Offer",
+          "name": "One-time payment",
+          "price": "300.00",
+          "priceCurrency": "PHP"
+        }
       }
     </script>
     <link rel="icon" href="assets/logo/tudlo-logo-2.png" />
@@ -80,7 +72,7 @@
          the tracker-only layer. ?v= is a cache-buster — bump it when the
          file changes. Keep styles.css at the same version as index.html. -->
     <link rel="stylesheet" href="assets/css/styles.css?v=7" />
-    <link rel="stylesheet" href="assets/css/tracker.css?v=2" />
+    <link rel="stylesheet" href="assets/css/tracker.css?v=3" />
   </head>
   <body>
     <header>
@@ -116,7 +108,7 @@
                 <span class="ico-arrow" aria-hidden="true"></span></a
               ><a class="btn btn-white" href="#inside">Take a look inside</a>
             </div>
-            <p class="tiny">For Mac and Windows · From ₱499.00 for 1 year</p>
+            <p class="tiny">For Mac and Windows · ₱300.00 one-time payment</p>
           </div>
 
           <div class="t-hero-shot">
@@ -394,11 +386,11 @@
           <div class="steps">
             <article class="step">
               <div class="step-number">01</div>
-              <h3>Choose your plan</h3>
+              <h3>Send your request</h3>
               <p>
-                Pick 1 or 2 years and send us the short request form. Tell us
-                whether you use a Mac (Apple chip or Intel) or Windows, and
-                we'll send the right installer.
+                Send us the short request form. Tell us whether you use a Mac
+                (Apple chip or Intel) or Windows, and we'll send the right
+                installer.
               </p>
             </article>
             <article class="step">
@@ -428,60 +420,36 @@
             <span class="eyebrow">Pricing</span>
             <h2 class="heading">Simple pricing.</h2>
             <p class="lead">
-              Pick the length that suits you. Every plan includes every
-              feature.
+              Pay once and it's yours. Every feature is included.
             </p>
           </div>
 
           <div class="plans">
-            <article class="plan">
-              <h3>1 year</h3>
-              <p class="plan-for">Try it for a full year.</p>
-              <p class="price"><span class="cur">₱</span>499<small>.00</small></p>
-              <p class="per">PHP · about ₱42 a month</p>
-              <ul class="ticks">
-                <li>Every feature included</li>
-                <li>1 computer, Mac or Windows</li>
-                <li>Works offline, data stays with you</li>
-                <li>Renew when it ends, no reinstall needed</li>
-              </ul>
-              <a
-                class="btn btn-blue"
-                data-open
-                data-plan="1"
-                href="mailto:support.tudlo@gmail.com?subject=Tudlo%20Tracker%20%E2%80%94%201%20year%20license&amp;body=Hi%20Tudlo%2C%0A%0AI'd%20like%20the%201-year%20Tudlo%20Tracker%20license%20(%E2%82%B1499.00).%0A%0AName%3A%20%0AMy%20computer%20(Mac%20with%20Apple%20chip%20%2F%20Mac%20with%20Intel%20%2F%20Windows)%3A%20%0A"
-                >Get 1 year
-                <span class="ico-arrow" aria-hidden="true"></span
-              ></a>
-            </article>
-
             <article class="plan plan-best">
-              <span class="plan-badge">Best value · Save ₱199</span>
-              <h3>2 years</h3>
-              <p class="plan-for">Two years for less than two single years.</p>
-              <p class="price"><span class="cur">₱</span>799<small>.00</small></p>
-              <p class="per">PHP · about ₱33 a month</p>
+              <span class="plan-badge">Pay once · No renewals</span>
+              <h3>One-time payment</h3>
+              <p class="plan-for">Yours to keep, with no yearly fees.</p>
+              <p class="price"><span class="cur">₱</span>300<small>.00</small></p>
+              <p class="per">PHP · paid once</p>
               <ul class="ticks">
                 <li>Every feature included</li>
                 <li>1 computer, Mac or Windows</li>
                 <li>Works offline, data stays with you</li>
-                <li>Renew when it ends, no reinstall needed</li>
+                <li>Your license never expires</li>
               </ul>
               <a
                 class="btn btn-gold"
                 data-open
-                data-plan="2"
-                href="mailto:support.tudlo@gmail.com?subject=Tudlo%20Tracker%20%E2%80%94%202%20year%20license&amp;body=Hi%20Tudlo%2C%0A%0AI'd%20like%20the%202-year%20Tudlo%20Tracker%20license%20(%E2%82%B1799.00).%0A%0AName%3A%20%0AMy%20computer%20(Mac%20with%20Apple%20chip%20%2F%20Mac%20with%20Intel%20%2F%20Windows)%3A%20%0A"
-                >Get 2 years
+                href="mailto:support.tudlo@gmail.com?subject=Tudlo%20Tracker%20%E2%80%94%20license&amp;body=Hi%20Tudlo%2C%0A%0AI'd%20like%20to%20get%20Tudlo%20Tracker%20(%E2%82%B1300.00%2C%20one-time%20payment).%0A%0AName%3A%20%0AMy%20computer%20(Mac%20with%20Apple%20chip%20%2F%20Mac%20with%20Intel%20%2F%20Windows)%3A%20%0A"
+                >Get Tudlo Tracker
                 <span class="ico-arrow" aria-hidden="true"></span
               ></a>
             </article>
           </div>
           <p class="plans-note">
-            Prices are in Philippine pesos (PHP). Each license is made for one
-            computer. Need it on more than one? Just ask. If a license ends,
-            the app turns view-only: you can still see, back up and export
-            everything, and nothing is ever deleted.
+            The price is in Philippine pesos (PHP) and is paid once. Each
+            license is made for one computer and never expires. Need it on more
+            than one computer? Just ask.
           </p>
         </div>
       </section>
@@ -534,21 +502,19 @@
               </p>
             </details>
             <details>
-              <summary>What happens when my license ends?</summary>
+              <summary>Is there a yearly fee or renewal?</summary>
               <p>
-                The app keeps working for 7 more days. After that it becomes
-                view-only: you can still look at everything, make backups and
-                export, but you can't add or change anything until you renew.
-                Nothing is ever deleted. To renew, we send you a new license
-                file. You don't reinstall and your data doesn't change.
+                No. You pay ₱300.00 once and the license never expires. There
+                are no renewals and no yearly fees, and nothing is ever
+                deleted.
               </p>
             </details>
             <details>
               <summary>What if I get a new computer?</summary>
               <p>
                 Install the app on the new computer and send us its code. We'll
-                make a new license with the same end date, and you restore your
-                latest backup. Everything comes back as it was.
+                make a new license for it, and you restore your latest backup.
+                Everything comes back as it was.
               </p>
             </details>
           </div>
@@ -564,13 +530,13 @@
             >
             <h2 class="t-cta-title">Get organised with Tudlo Tracker.</h2>
             <p>
-              1 year for ₱499.00 or 2 years for ₱799.00. Send us a request and
-              we'll get you set up.
+              One payment of ₱300.00, no renewals. Send us a request and we'll
+              get you set up.
             </p>
           </div>
           <div class="cta-actions">
             <a class="btn btn-white" href="#pricing" data-open
-              >Choose your plan
+              >Get Tudlo Tracker
               <span class="ico-arrow" aria-hidden="true"></span
             ></a>
           </div>
@@ -605,8 +571,7 @@
     </footer>
 
     <!-- ORDER REQUEST MODAL — same Web3Forms setup as the main Tudlo page.
-         Every [data-open] button opens it; [data-plan] preselects the plan,
-         otherwise the 2-year plan is the default. -->
+         Every [data-open] button opens it. -->
     <div class="modal-backdrop" id="modal" aria-hidden="true">
       <section
         class="modal"
@@ -618,8 +583,7 @@
         ><span class="eyebrow">Get Tudlo Tracker</span>
         <h2 id="modalTitle">Let's get you set up.</h2>
         <p>
-          Choose your plan and tell us how to reach you. We'll message you with
-          the next steps.
+          Tell us how to reach you. We'll message you with the next steps.
         </p>
         <form id="form" action="https://api.web3forms.com/submit" method="POST">
           <!-- Submissions are delivered to support.tudlo@gmail.com
@@ -633,7 +597,7 @@
             type="hidden"
             id="subject"
             name="subject"
-            value="New Tudlo Tracker request"
+            value="New Tudlo Tracker request — ₱300.00"
           />
           <input type="hidden" name="from_name" value="Tudlo Tracker Page" />
           <!-- honeypot: real people never fill this; bots do -->
@@ -647,33 +611,18 @@
           />
 
           <div class="field full">
-            <span class="field-label" id="planLabel">Your plan</span>
+            <span class="field-label" id="planLabel">Your license</span>
             <div class="plan-pick" role="radiogroup" aria-labelledby="planLabel">
               <label class="plan-opt">
                 <input
                   type="radio"
                   name="plan"
-                  value="1 year — ₱499.00"
-                  data-plan="1"
-                  required
-                />
-                <span class="plan-opt-card">
-                  <b>1 year</b>
-                  <em>₱499.00</em>
-                </span>
-              </label>
-              <label class="plan-opt">
-                <input
-                  type="radio"
-                  name="plan"
-                  value="2 years — ₱799.00"
-                  data-plan="2"
+                  value="One-time payment — ₱300.00"
                   checked
                 />
                 <span class="plan-opt-card">
-                  <b>2 years</b>
-                  <em>₱799.00</em>
-                  <i>Best value</i>
+                  <b>One-time payment</b>
+                  <em>₱300.00</em>
                 </span>
               </label>
             </div>
@@ -781,30 +730,21 @@
         }),
       );
 
-      // Order request modal. Every [data-open] button opens it; a button with
-      // data-plan="1" or "2" preselects that plan, anything else gets the
-      // 2-year plan. Without JS these links still work (anchor / mailto).
+      // Order request modal. Every [data-open] button opens it. Without JS
+      // these links still work (anchor / mailto).
       const modal = document.getElementById("modal"),
         modalClose = document.getElementById("modalClose"),
         bookingForm = document.getElementById("form"),
         formMsg = document.getElementById("success"),
         submitBtn = bookingForm.querySelector('button[type="submit"]'),
         submitBtnDefaultHtml = submitBtn.innerHTML,
-        subjectField = document.getElementById("subject"),
         messenger = document.getElementById("messenger"),
         contact = document.getElementById("messengerContact"),
         contactLabel = document.getElementById("contactLabel");
       let lastOpener = null;
 
-      const selectPlan = (plan) => {
-        const radio =
-          bookingForm.querySelector('input[name="plan"][data-plan="' + plan + '"]') ||
-          bookingForm.querySelector('input[name="plan"][data-plan="2"]');
-        radio.checked = true;
-      };
-      const openModal = (plan, opener) => {
+      const openModal = (opener) => {
         lastOpener = opener || null;
-        selectPlan(plan);
         modal.classList.add("show");
         modal.setAttribute("aria-hidden", "false");
         document.body.classList.add("modal-open");
@@ -835,7 +775,7 @@
       document.querySelectorAll("[data-open]").forEach((el) =>
         el.addEventListener("click", (e) => {
           e.preventDefault();
-          openModal(el.dataset.plan, el);
+          openModal(el);
         }),
       );
       modalClose.addEventListener("click", closeModal);
@@ -877,10 +817,6 @@
           showMsg("Please complete the captcha challenge.", true);
           return;
         }
-        // Put the plan in the email subject so requests are easy to spot.
-        subjectField.value =
-          "New Tudlo Tracker request — " +
-          bookingForm.querySelector('input[name="plan"]:checked').value;
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending…";
         formMsg.style.display = "none";
